@@ -1,0 +1,31 @@
+.root{
+-fx-padding:15;
+-fx-background-color: cornsilk;
+}
+.label{
+-fx-text-fill: blue;
+-fx-font-size: 1.2em;
+-fx-font-weight: bold;
+}
+
+#dateHorsMois {
+    -fx-text-fill: grey;
+}
+
+#today {
+    -fx-background-color: red;
+}
+
+.scroll-pane {
+    -fx-background: #ddf5ee;
+    -fx-border-color: green;
+}
+#opaque {
+-fx-background-color: white;
+}
+.toggle-button{
+    -fx-background-color: white;
+}
+.toggle-button:selected{
+    -fx-background-color: gainsboro;
+}
