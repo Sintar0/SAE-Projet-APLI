@@ -1,7 +1,7 @@
-package vue;
+package modele;
 
 import java.io.*;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class LectureEcriture {
     public static Scenario lectureScenario (File fichier) throws IOException{
@@ -34,4 +34,5 @@ public class LectureEcriture {
         }
         sortie.close();
     }
+
 }

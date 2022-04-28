@@ -6,4 +6,6 @@ module vue {
 
     opens vue to javafx.fxml;
     exports vue;
+    exports modele;
+    opens modele to javafx.fxml;
 }
