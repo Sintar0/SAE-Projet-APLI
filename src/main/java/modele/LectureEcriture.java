@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 
 public class LectureEcriture {
+    public static HashMap<String,Integer> ville = new HashMap<>();
     public static Scenario lectureScenario (File fichier) throws IOException{
         Scenario scenario = new Scenario();
 
@@ -23,6 +24,26 @@ public class LectureEcriture {
         while (ligne != null);
         bufferEntree.close();
         return scenario;
+    }
+
+    public static Map lectureVille(File fichier) throws IOException {
+        BufferedReader bufferEntree = new BufferedReader(new FileReader(fichier));
+        LineNumberReader readerLigne = new LineNumberReader(bufferEntree);
+        String ligne;
+
+        StringTokenizer tokenizer;
+        do{
+            ligne = readerLigne.readLine();
+            int numeroLigne = readerLigne.getLineNumber();
+            if (ligne != null){
+                tokenizer = new StringTokenizer(ligne, " :");
+                String tokenVille = tokenizer.nextToken();
+                ville.put(tokenVille,numeroLigne);
+            }
+        }
+        while (ligne != null);
+        bufferEntree.close();
+        return ville;
     }
 
     public static void ecritureScenario (String nomFichier, Scenario scenario) throws IOException{
