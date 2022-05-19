@@ -25,6 +25,12 @@ public class Scenario{
         return acheteurs;
     }
 
+    /*
+    public String getVille(){
+        return
+    }
+
+     */
     public String toString(){
         return vendeurs + "\n" + acheteurs;
     }
