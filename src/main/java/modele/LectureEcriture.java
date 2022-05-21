@@ -3,9 +3,12 @@ package modele;
 import java.io.*;
 import java.util.*;
 
+/**
+ * Classe contenant toutes les méthodes concernant la lecture et l'écriture des fichiers
+ */
 public class LectureEcriture implements ConstantesVille {
     public static HashMap<String,Integer> ville = new HashMap<>();
-    public static int [][] tabDistances = new int [28][28];
+    public static int [][] tabDistances = new int [29][29];
     public static Scenario lectureScenario (File fichier) throws IOException{
         Scenario scenario = new Scenario();
 
@@ -27,6 +30,12 @@ public class LectureEcriture implements ConstantesVille {
         return scenario;
     }
 
+    /**
+     * Cette méthode lit un fichier et lie une ville avec son index
+     * @param fichier
+     * @return Une HashMap contenant les villes (clé : ville , valeur : index)
+     * @throws IOException
+     */
     public static Map lectureVille(File fichier) throws IOException {
         BufferedReader bufferEntree = new BufferedReader(new FileReader(fichier));
         LineNumberReader readerLigne = new LineNumberReader(bufferEntree);
@@ -47,21 +56,28 @@ public class LectureEcriture implements ConstantesVille {
         return ville;
     }
 
+    /**
+     * Cette méthode récupère les informations d'un fichier distance et le transforme sous forme d'un tableau 2D
+     * @param fichier --> fichier à lire pour la récupération des distances
+     * @return un tableau en deux dimensions contenant les distances
+     * @throws IOException
+     */
+
     /*
     public static int [][] lectureDistances(File fichier) throws IOException{
         BufferedReader bufferEntree = new BufferedReader(new FileReader(fichier));
-        LineNumberReader readerLigne = new LineNumberReader(bufferEntree);
-        String ligne;
+        LineNumberReader readerLigne = new LineNumberReader(bufferEntree); //récupération du numéro de ligne
+        String ligne = "";
 
         StringTokenizer tokenizer;
         do{
             for (int i = 0 ; i < 29 ; i++){
                 ligne = readerLigne.readLine();
-                int numeroLigne = readerLigne.getLineNumber() -1;
+                int numeroLigne = readerLigne.getLineNumber() -1; // commence à 1 par défaut. Or, on veut commencer à 0
                 if (ligne != null){
                     tokenizer = new StringTokenizer(ligne, " ");
                     String tokenDistances = tokenizer.nextToken();
-                    tabDistances[numeroLigne][i] = Integer.parseInt(tokenDistances);
+                        tabDistances[numeroLigne][i] = Integer.parseInt(tokenDistances); //Récupération des tokens sous forme de int
                 }
             }
         }
@@ -69,11 +85,22 @@ public class LectureEcriture implements ConstantesVille {
         bufferEntree.close();
         return tabDistances;
     }
-    */
-    public static int getDistance(String ville1, String ville2){
+*/
+    /**
+     * Cette méthode retourne la distance entre deux villes
+     * @param ville1 --> première ville pour le calcul de la distance
+     * @param ville2 --> deuxième ville
+     * @return distance entre ville1 et ville2 récupérée dans tabDistances
+     */
+    public static int getDistance(String ville1, String ville2) {
         return TAB_DISTANCES[ville.get(ville1)][ville.get(ville2)];
     }
 
+    /**
+     * Cette méthode va récupérer un fichier présent sur l'ordinateur (écrit de la même façon que les scénarios) pour l'utiliser dans l'application
+     * @return
+     */
+    /*
     public static void ecritureScenario (String nomFichier, Scenario scenario) throws IOException{
         PrintWriter sortie = new PrintWriter(new BufferedWriter(new FileWriter(nomFichier)));
         int i = 0;
@@ -83,4 +110,5 @@ public class LectureEcriture implements ConstantesVille {
         }
         sortie.close();
     }
+     */
 }
