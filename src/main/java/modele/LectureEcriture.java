@@ -8,7 +8,8 @@ import java.util.*;
  */
 public class LectureEcriture implements ConstantesVille {
     public static HashMap<String,Integer> ville = new HashMap<>();
-    public static int [][] tabDistances = new int [29][29];
+    public static HashMap<String,String> vendeurs = new HashMap<>();
+
     public static Scenario lectureScenario (File fichier) throws IOException{
         Scenario scenario = new Scenario();
 
@@ -96,10 +97,31 @@ public class LectureEcriture implements ConstantesVille {
         return TAB_DISTANCES[ville.get(ville1)][ville.get(ville2)];
     }
 
-    /**
-     * Cette méthode va récupérer un fichier présent sur l'ordinateur (écrit de la même façon que les scénarios) pour l'utiliser dans l'application
-     * @return
-     */
+    public static HashMap<String, String> lectureVendeurs(File fichier) throws IOException{
+        BufferedReader bufferEntree = new BufferedReader(new FileReader(fichier));
+
+        String ligne;
+
+        StringTokenizer tokenizer;
+        do{
+            ligne = bufferEntree.readLine();
+            if (ligne != null){
+                tokenizer = new StringTokenizer(ligne, " ");
+                while(tokenizer.hasMoreTokens()){
+                    String tokenMembres = tokenizer.nextToken();
+                    vendeurs.put(tokenMembres, tokenizer.nextToken());
+                }
+            }
+        }
+        while (ligne != null);
+        bufferEntree.close();
+        return vendeurs;
+    }
+
+    public static String getVilleVendeur(String vendeur){
+        return vendeurs.get(vendeur);
+    }
+
     /*
     public static void ecritureScenario (String nomFichier, Scenario scenario) throws IOException{
         PrintWriter sortie = new PrintWriter(new BufferedWriter(new FileWriter(nomFichier)));
