@@ -10,7 +10,7 @@ import java.io.File;
 
 public class mainApplication extends Application {
     public void start(Stage stage) {
-        HBox root = new HBox();
+        VBoxRoot root = new VBoxRoot();
         Scene scene = new Scene(root, 500, 500);
         File css = new File("css" + File.separator + "premiersStyles.css");
         scene.getStylesheets().add(css.toURI().toString());
