@@ -8,7 +8,7 @@ import java.util.*;
  */
 public class LectureEcriture implements ConstantesVille {
     public static HashMap<String,Integer> ville = new HashMap<>();
-    public static HashMap<String,String> vendeurs = new HashMap<>();
+    public static HashMap<String,String> mapVendeurs = new HashMap<>();
 
     public static Scenario lectureScenario (File fichier) throws IOException{
         Scenario scenario = new Scenario();
@@ -109,17 +109,17 @@ public class LectureEcriture implements ConstantesVille {
                 tokenizer = new StringTokenizer(ligne, " ");
                 while(tokenizer.hasMoreTokens()){
                     String tokenMembres = tokenizer.nextToken();
-                    vendeurs.put(tokenMembres, tokenizer.nextToken());
+                    mapVendeurs.put(tokenMembres, tokenizer.nextToken());
                 }
             }
         }
         while (ligne != null);
         bufferEntree.close();
-        return vendeurs;
+        return mapVendeurs;
     }
 
     public static String getVilleVendeur(String vendeur){
-        return vendeurs.get(vendeur);
+        return mapVendeurs.get(vendeur);
     }
 
     /*

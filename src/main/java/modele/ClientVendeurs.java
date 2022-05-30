@@ -5,6 +5,8 @@ import java.io.IOException;
 import modele.LectureEcriture.*;
 
 import static modele.LectureEcriture.*;
+import static modele.Scenario.acheteurs;
+import static modele.Scenario.vendeurs;
 
 public class ClientVendeurs {
     public static void main (String [] args) throws IOException {
@@ -13,7 +15,13 @@ public class ClientVendeurs {
         System.out.println(lectureVendeurs(listeVendeurs));
         System.out.println(getVilleVendeur("Arbok"));
         System.out.println(lectureVille(villes));
-        System.out.println(getDistance(getVilleVendeur("Aquali"), getVilleVendeur("Sulfura")));
-        System.out.println(getDistance("Grenoble", "Lille"));
+        System.out.println(getDistance(getVilleVendeur("Kokiyas"), getVilleVendeur("Chenipan")));
+        System.out.println(getDistance("Lyon", "Paris"));
+
+        File scenario0 = new File("src/main/java/ressources/scenario_0.txt");
+        System.out.println(lectureScenario(scenario0));
     }
+
+
 }
+
