@@ -1,7 +1,11 @@
 package modele;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.TreeMap;
+
 import modele.LectureEcriture;
 
 import static modele.LectureEcriture.getDistance;
@@ -29,13 +33,22 @@ public class Scenario{
         return acheteurs;
     }
 
+
     public static int lectureDistance() {
+        TreeMap<String, ArrayList<String>> voisinsSortants = new TreeMap<>();
+        TreeMap<String, Integer> degresEntrants = new TreeMap<>();
         int sum = 0;
-        for (int indexVend = 0; indexVend < vendeurs.size() ; indexVend++){
-            System.out.println("ETAPE" + " " + indexVend);
-            sum += getDistance(getVilleVendeur(acheteurs.get(indexVend)), getVilleVendeur(vendeurs.get(indexVend)));
-            System.out.println(sum);
+
+        for (int i = 0 ; i < vendeurs.size() ; i++) {
+            voisinsSortants.computeIfAbsent(vendeurs.get(i), k -> new ArrayList<>()).add(acheteurs.get(i));
         }
+        for (int i = 0 ; i < voisinsSortants.size() ; i++){
+            for (ArrayList<String> value : voisinsSortants.values()){
+//                int occurrences = Collections.frequency(value, i);
+//                System.out.println(occurences);
+            }
+        }
+        System.out.println(voisinsSortants);
         return sum;
     }
     public String toString(){
