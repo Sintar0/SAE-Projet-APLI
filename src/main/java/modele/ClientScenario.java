@@ -7,10 +7,10 @@ import static modele.LectureEcriture.*;
 
 public class ClientScenario extends Scenario {
     public static void main(String [] args) throws IOException {
-        File scenario0 = new File("src/main/java/ressources/scenario_1_1.txt");
+        File scenario0 = new File("src/main/java/ressources/scenario_0.txt");
         File listeVendeurs = new File("src/main/java/ressources/membres_APLI.txt");
         File villes = new File("src/main/java/ressources/distances.txt");
-        System.out.println(lectureScenario(scenario0));
+        lectureScenario(scenario0);
         lectureVendeurs(listeVendeurs);
         System.out.println(lectureVille(villes));
         long startTime = System.currentTimeMillis();

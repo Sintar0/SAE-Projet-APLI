@@ -76,10 +76,10 @@ public class Scenario {
         for (int p = 0;p<ordreGraph.size();p++){
             if(ordreGraph.get(p)!="null");
             ordreParfait.add(ordreGraph.get(p));
+            ordreParfait.remove(null);
         }
         ordreParfait.addFirst("Camion");
         ordreParfait.addLast("Camion");
-        ordreParfait.remove(null);
         for(int c = 0; c<ordreParfait.size();c++){
             ordreParfait.set(c, LectureEcriture.getVilleVendeur(ordreParfait.get(c)));
         }
