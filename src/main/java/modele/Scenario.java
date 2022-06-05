@@ -35,6 +35,7 @@ public class Scenario {
         TreeMap<String, ArrayList<String>> voisinsSortants = new TreeMap<>();
         TreeMap<String, Integer> degresEntrants = new TreeMap<>();
         ArrayList ordreGraph = new ArrayList<String>();
+        LinkedList<String> ordreParfait = new LinkedList<>();
         int sum = 0;
         for (int i = 0; i < vendeurs.size(); i++) {
             voisinsSortants.computeIfAbsent(vendeurs.get(i), k -> new ArrayList<>()).add(acheteurs.get(i));
@@ -56,21 +57,41 @@ public class Scenario {
             for (int j = 0; j < voisinsSortants.size();j++){
                 if(acheteurs.get(j)!=vendeurs.get(j))
                     ordreGraph.add(acheteurs.get(j));
-
             }
         }
-            System.out.println(ordreGraph);
+        System.out.println(ordreGraph);
 
+        for(int s=0;s<ordreGraph.size()-1;s++)
+        {
+            for(int m=s + 1;m<ordreGraph.size();m++)
+            {
 
-            // Sort the array 'arr' elements in ascending order
-            // using nested for loops
-
-
-            System.out.println(voisinsSortants);
-            return sum;
-
-
+                if(ordreGraph.get(s) != null && ordreGraph.get(s).equals(ordreGraph.get(m)))
+                {
+                    // ordreGraph = ArrayUtils.removeElement(ordreGraph, ordreGraph[s]); --m;??
+                    ordreGraph.set(m, null); // Mark for deletion later on
+                }
+            }
         }
+        for (int p = 0;p<ordreGraph.size();p++){
+            if(ordreGraph.get(p)!="null");
+            ordreParfait.add((String) ordreGraph.get(p));
+        }
+        ordreParfait.addFirst("Camion");
+        ordreParfait.addLast("Camion");
+
+        for(int c = 0; c<ordreParfait.size();c++)
+            getVilleVendeur(ordreParfait.get(c));
+
+
+        System.out.println(ordreGraph);
+        System.out.println(ordreParfait);
+        System.out.println(voisinsSortants);
+
+        return sum;
+
+
+    }
 
         public String toString () {
             return vendeurs + "\n" + acheteurs;
