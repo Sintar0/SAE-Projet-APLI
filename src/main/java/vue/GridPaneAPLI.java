@@ -20,13 +20,15 @@ public class GridPaneAPLI extends GridPane {
     public GridPaneAPLI(){
         setGridLinesVisible(true);
 
-        this.add(chemin, 0, 0, 2 ,1);
-        //this.add(calculer,0,3);
-        //this.add(totalKM, 1, 3,1,1);
-        this.add(boxButton, 0, 0);
-        boxButton.getChildren().addAll(apLeft,apRight);
+        this.add(chemin, 1, 1, 1 ,1);
+        this.add(calculer,1,1);
+        this.add(totalKM, 1, 1,1,1);
+        this.add(boxButton, 1, 2);
         apLeft.getChildren().add(calculer);
         apRight.getChildren().add(totalKM);
+        boxButton.getChildren().addAll(apLeft,apRight);
+        boxButton.setSpacing(265);
     }
 
 }
+
