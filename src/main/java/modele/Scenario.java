@@ -1,15 +1,7 @@
 package modele;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.TreeMap;
+import java.util.*;
 
-import modele.LectureEcriture;
-
-import static modele.LectureEcriture.getDistance;
-import static modele.LectureEcriture.getVilleVendeur;
 
 public class Scenario{
     static List<String> vendeurs;
@@ -37,18 +29,24 @@ public class Scenario{
     public static int lectureDistance() {
         TreeMap<String, ArrayList<String>> voisinsSortants = new TreeMap<>();
         TreeMap<String, Integer> degresEntrants = new TreeMap<>();
+        ArrayList<String> chemin = new ArrayList<>();
         int sum = 0;
 
-        for (int i = 0 ; i < vendeurs.size() ; i++) {
+        for (int i = 0 ; i < vendeurs.size() ; i++) { //remplissage de voisinsSortants
             voisinsSortants.computeIfAbsent(vendeurs.get(i), k -> new ArrayList<>()).add(acheteurs.get(i));
         }
-        for (int i = 0 ; i < voisinsSortants.size() ; i++){
+        for (String key : voisinsSortants.keySet()){ // remplissage de degresEntrants
+            int occurences = 0; //permet de réinitialiser la valeur de occurences à 0 en changeant de pokémon
             for (ArrayList<String> value : voisinsSortants.values()){
-//                int occurrences = Collections.frequency(value, i);
-//                System.out.println(occurences);
+                if (value.contains(key)){ //ajoute 1 à occurences quand on trouve le pokémon dans une liste
+                    occurences++;
+                }
             }
+            degresEntrants.put(key, occurences);
         }
+
         System.out.println(voisinsSortants);
+        System.out.println(degresEntrants);
         return sum;
     }
     public String toString(){

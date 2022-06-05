@@ -5,8 +5,7 @@ import java.io.IOException;
 import modele.LectureEcriture.*;
 
 import static modele.LectureEcriture.*;
-import static modele.Scenario.acheteurs;
-import static modele.Scenario.vendeurs;
+
 
 public class ClientVendeurs {
     public static void main (String [] args) throws IOException {
