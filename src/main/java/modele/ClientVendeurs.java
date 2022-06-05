@@ -13,7 +13,7 @@ public class ClientVendeurs {
         File listeVendeurs = new File("src/main/java/ressources/membres_APLI.txt");
         File villes = new File("src/main/java/ressources/distances.txt");
         System.out.println(lectureVendeurs(listeVendeurs));
-        System.out.println(getVilleVendeur("Arbok"));
+        System.out.println(getVilleVendeur("Caratroc"));
         System.out.println(lectureVille(villes));
         System.out.println(getDistance(getVilleVendeur("Kokiyas"), getVilleVendeur("Chenipan")));
         System.out.println(getDistance("Lyon", "Paris"));
