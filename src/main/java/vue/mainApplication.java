@@ -1,6 +1,7 @@
 package vue;
 
 import javafx.application.Application;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -14,12 +15,11 @@ import java.io.File;
 public class mainApplication extends Application {
     @Override
     public void start(Stage stage) {
-        VBoxRoot root = new VBoxRoot();
-
-        // Create MenuBar
+        //  MenuBar
         MenuBar menuBar = new MenuBar();
+        VBoxRoot mainVBox = new VBoxRoot();
 
-        // Create menus
+        //  menus
         Menu fileMenu = new Menu("Scénario");
         Menu editMenu = new Menu("Ressource");
         Menu helpMenu = new Menu("Help");
@@ -41,15 +41,17 @@ public class mainApplication extends Application {
         distanceItem.setToggleGroup(choixRessource);
         membreItem.setToggleGroup(choixRessource);
 
-        // Add menuItems to the Menus
+
         fileMenu.getItems().addAll(Senario1Item, Senario2Item, Senario3Item, MembreItem);
         editMenu.getItems().addAll(distanceItem, membreItem);
 
-        // Add Menus to the MenuBar
+
         menuBar.getMenus().addAll(fileMenu, editMenu, helpMenu);
-        BorderPane menu = new BorderPane();
-        menu.setTop(menuBar);
-        Scene scene = new Scene(root, 1000, 1000);
+
+
+        VBox root = new VBox(menuBar,mainVBox);
+
+        Scene scene = new Scene(root, 500, 500);
 
 
 

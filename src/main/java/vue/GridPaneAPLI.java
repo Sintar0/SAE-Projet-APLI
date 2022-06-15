@@ -27,7 +27,8 @@ public class GridPaneAPLI extends GridPane {
         apLeft.getChildren().add(calculer);
         apRight.getChildren().add(totalKM);
         boxButton.getChildren().addAll(apLeft,apRight);
-        boxButton.setSpacing(265);
+        boxButton.setSpacing(275);
+
     }
 
 }

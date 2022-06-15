@@ -51,7 +51,7 @@ public class Scenario {
             ordreGraph.add(source);
 
             while (it.hasNext()) {
-                source = (String) it.next();
+                source = it.next();
                 ordreGraph.add(source);
             }
             for (int j = 0; j < voisinsSortants.size();j++){
