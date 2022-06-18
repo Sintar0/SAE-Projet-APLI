@@ -7,7 +7,7 @@ import modele.LectureEcriture;
 
 import static modele.LectureEcriture.*;
 
-public class Scenario {
+public class Scenario extends LectureEcriture {
     static List<String> vendeurs;
     static List<String> acheteurs;
 
@@ -68,8 +68,7 @@ public class Scenario {
 
                 if(ordreGraph.get(s) != null && ordreGraph.get(s).equals(ordreGraph.get(m)))
                 {
-                    // ordreGraph = ArrayUtils.removeElement(ordreGraph, ordreGraph[s]); --m;??
-                    ordreGraph.set(m, null); // Mark for deletion later on
+                    ordreGraph.set(m, null);
                 }
             }
         }

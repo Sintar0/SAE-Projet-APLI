@@ -1,18 +1,23 @@
 package vue;
 
+import controleur.Controleur;
 import javafx.application.Application;
-import javafx.scene.Node;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.RadioMenuItem;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.io.File;
+import org.controlsfx.control.action.Action;
 
 public class mainApplication extends Application {
+    public RadioMenuItem Scenario1Item = new RadioMenuItem("Scénario 1");
+    public RadioMenuItem Scenario2Item = new RadioMenuItem("Scénario 2");
+    public RadioMenuItem Scenario3Item = new RadioMenuItem("Scénario 3");
+    public RadioMenuItem MembreItem = new RadioMenuItem("Membre APLI");
     @Override
     public void start(Stage stage) {
         //  MenuBar
@@ -25,15 +30,12 @@ public class mainApplication extends Application {
         Menu helpMenu = new Menu("Help");
 
         // Create MenuItems
-        RadioMenuItem Senario1Item = new RadioMenuItem("Scénario 1");
-        RadioMenuItem Senario2Item = new RadioMenuItem("Scénario 2");
-        RadioMenuItem Senario3Item = new RadioMenuItem("Scénario 3");
-        RadioMenuItem MembreItem = new RadioMenuItem("Membre APLI");
+
         ToggleGroup choixScenario = new ToggleGroup();
-        Senario1Item.setToggleGroup(choixScenario);
-        Senario2Item.setToggleGroup(choixScenario);
-        Senario3Item.setToggleGroup(choixScenario);
-        Senario1Item.setSelected(true);
+        Scenario1Item.setToggleGroup(choixScenario);
+        Scenario2Item.setToggleGroup(choixScenario);
+        Scenario3Item.setToggleGroup(choixScenario);
+        Scenario1Item.setSelected(true);
 
         RadioMenuItem distanceItem = new RadioMenuItem("Distance");
         RadioMenuItem membreItem = new RadioMenuItem("Membre");
@@ -42,12 +44,12 @@ public class mainApplication extends Application {
         membreItem.setToggleGroup(choixRessource);
 
 
-        fileMenu.getItems().addAll(Senario1Item, Senario2Item, Senario3Item, MembreItem);
+        fileMenu.getItems().addAll(Scenario1Item, Scenario2Item, Scenario3Item, MembreItem);
         editMenu.getItems().addAll(distanceItem, membreItem);
-
 
         menuBar.getMenus().addAll(fileMenu, editMenu, helpMenu);
 
+        Controleur controlerVBox = VBoxRoot.getControleur();
 
         VBox root = new VBox(menuBar,mainVBox);
 
@@ -55,11 +57,17 @@ public class mainApplication extends Application {
 
 
 
+
         stage.setScene(scene);
         stage.setTitle("Navigation APLI");
         stage.show();
     }
+    EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent actionEvent) {
 
+        }
+    };
     public static void main(String[] args) {
         Application.launch(args);
     }
