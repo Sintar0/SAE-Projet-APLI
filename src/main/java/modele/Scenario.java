@@ -30,7 +30,7 @@ public class Scenario extends LectureEcriture {
     }
 
 
-    public static int lectureDistance() {
+    public static String lectureDistance() {
         TreeMap<String, ArrayList<String>> voisinsSortants = new TreeMap<>();
         TreeMap<String, Integer> degresEntrants = new TreeMap<>();
         ArrayList<String> ordreGraph = new ArrayList<>();
@@ -92,9 +92,63 @@ public class Scenario extends LectureEcriture {
             i++;
             j++;
         }
-        return sum;
+        return sum + "km";
     }
+    public static String getChemin (){
+        TreeMap<String, ArrayList<String>> voisinsSortants = new TreeMap<>();
+        TreeMap<String, Integer> degresEntrants = new TreeMap<>();
+        ArrayList<String> ordreGraph = new ArrayList<>();
+        LinkedList<String> ordreParfait = new LinkedList<>();
+        int sum = 0;
 
+        for (int i = 0; i < vendeurs.size(); i++) {
+            voisinsSortants.computeIfAbsent(vendeurs.get(i), k -> new ArrayList<>()).add(acheteurs.get(i));
+        }
+
+
+        Set<String> entrySet = voisinsSortants.keySet();
+        String source;
+        Iterator<String> it = entrySet.iterator();
+
+        if (!entrySet.equals(it.next())) {
+            source = it.next();
+            ordreGraph.add(source);
+
+            while (it.hasNext()) {
+                source = it.next();
+                ordreGraph.add(source);
+            }
+            for (int j = 0; j < voisinsSortants.size();j++){
+                if(acheteurs.get(j)!=vendeurs.get(j))
+                    ordreGraph.add(acheteurs.get(j));
+            }
+        }
+        System.out.println(ordreGraph);
+
+        for(int s=0;s<ordreGraph.size()-1;s++)
+        {
+            for(int m=s + 1;m<ordreGraph.size();m++)
+            {
+
+                if(ordreGraph.get(s) != null && ordreGraph.get(s).equals(ordreGraph.get(m)))
+                {
+                    ordreGraph.set(m, null);
+                }
+            }
+        }
+        for (int p = 0;p<ordreGraph.size();p++){
+            if(ordreGraph.get(p)!="null");
+            ordreParfait.add(ordreGraph.get(p));
+            ordreParfait.remove(null);
+        }
+        ordreParfait.addFirst("Camion");
+        ordreParfait.addLast("Camion");
+        for(int c = 0; c<ordreParfait.size();c++){
+            ordreParfait.set(c, LectureEcriture.getVilleVendeur(ordreParfait.get(c)));
+        }
+
+        return "Vous pouvez emprunter ce chemin :" + "\n" + ordreParfait ;
+    }
         public String toString () {
             return vendeurs + "\n" + acheteurs;
         }

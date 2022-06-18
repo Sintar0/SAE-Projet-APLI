@@ -3,6 +3,7 @@ package vue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -22,7 +23,7 @@ public class GridPaneAPLI extends GridPane {
     AnchorPane apRight = new AnchorPane();
     protected HBox boxButton = new HBox();
 
-    public GridPaneAPLI(){
+    public GridPaneAPLI() throws IOException {
         this.add(scenario, 2,1,1,1);
         this.add(chemin, 1, 1, 1 ,1);
         this.add(calculer,1,1);
@@ -34,6 +35,7 @@ public class GridPaneAPLI extends GridPane {
         boxButton.setSpacing(275);
 
         calculer.setOnAction(event);
+
     }
     EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
         @Override
@@ -56,10 +58,20 @@ public class GridPaneAPLI extends GridPane {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println(Scenario.lectureDistance());
+            Label distanceChemin = new Label(Scenario.lectureDistance());
+            Label itineraire = new Label(Scenario.getChemin());
+            totalKM.setText(distanceChemin.getText());
+            chemin.setText(itineraire.getText());
         }
+        File scenario0 = new File("src/main/java/ressources/scenario_1_1.txt");
+        Label scenario1 = new Label(Scenario.lectureScenario(scenario0).toString());
+
+
+
     };
 
 
+
 }
+
 
