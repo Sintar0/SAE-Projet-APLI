@@ -2,23 +2,34 @@ package vue;
 
 import controleur.Controleur;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.RadioMenuItem;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import modele.LectureEcriture;
+import org.controlsfx.control.action.Action;
+import modele.*;
+
+import java.io.File;
+import java.io.IOException;
+
+import static modele.LectureEcriture.lectureScenario;
 
 public class mainApplication extends Application {
-    public RadioMenuItem scenario_0Item = new RadioMenuItem("Scénario 0");
-    public RadioMenuItem scenario_1_1Item = new RadioMenuItem("Scénario 1_1");
-    public RadioMenuItem scenario_1_2Item = new RadioMenuItem("Scénario 1_2");
-    public RadioMenuItem scenario_2_1Item = new RadioMenuItem("Scénario 2_1");
-    public RadioMenuItem scenario_2_2Item = new RadioMenuItem("Scénario 2_2");
-    public RadioMenuItem MembreItem = new RadioMenuItem("Membre APLI");
+    public static RadioMenuItem Scenario1Item = new RadioMenuItem("Scénario 1");
+    public static RadioMenuItem Scenario2Item = new RadioMenuItem("Scénario 2");
+    public static RadioMenuItem Scenario3Item = new RadioMenuItem("Scénario 3");
+    public static RadioMenuItem distanceItem = new RadioMenuItem("Distance");
+    public static RadioMenuItem membreItem = new RadioMenuItem("Membre");
+    public static RadioMenuItem helpScenarioItem = new RadioMenuItem("Aide menu scénario");
+    public static RadioMenuItem helpRessourceItem = new RadioMenuItem("Aide ressources");
+
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws IOException {
+
         //  MenuBar
         MenuBar menuBar = new MenuBar();
         VBoxRoot mainVBox = new VBoxRoot();
@@ -29,30 +40,34 @@ public class mainApplication extends Application {
         Menu helpMenu = new Menu("Help");
 
         // Create MenuItems
-
         ToggleGroup choixScenario = new ToggleGroup();
-        scenario_0Item.setToggleGroup(choixScenario);
-        scenario_1_1Item.setToggleGroup(choixScenario);
-        scenario_1_2Item.setToggleGroup(choixScenario);
-        scenario_2_1Item.setToggleGroup(choixScenario);
-        scenario_2_2Item.setToggleGroup(choixScenario);
-        scenario_0Item.setSelected(true);
+        Scenario1Item.setToggleGroup(choixScenario);
+        Scenario2Item.setToggleGroup(choixScenario);
+        Scenario3Item.setToggleGroup(choixScenario);
+        Scenario1Item.setSelected(true);
 
-        RadioMenuItem distanceItem = new RadioMenuItem("Distance");
-        RadioMenuItem membreItem = new RadioMenuItem("Membre");
+
+
         ToggleGroup choixRessource = new ToggleGroup();
         distanceItem.setToggleGroup(choixRessource);
         membreItem.setToggleGroup(choixRessource);
 
+        ToggleGroup choixAide = new ToggleGroup();
+        helpScenarioItem.setToggleGroup(choixAide);
+        helpRessourceItem.setToggleGroup(choixAide);
 
-        fileMenu.getItems().addAll(scenario_0Item, scenario_1_1Item, scenario_1_2Item, scenario_2_1Item, scenario_2_2Item);
+        fileMenu.getItems().addAll(Scenario1Item, Scenario2Item, Scenario3Item);
         editMenu.getItems().addAll(distanceItem, membreItem);
-
+        helpMenu.getItems().addAll(helpScenarioItem,helpRessourceItem);
         menuBar.getMenus().addAll(fileMenu, editMenu, helpMenu);
 
-        VBox root = new VBox(menuBar,mainVBox);
+        Controleur controlerVBox = VBoxRoot.getControleur();
 
-        Scene scene = new Scene(root, 500, 500);
+        VBox root = new VBox(menuBar, controlerVBox);
+
+        Scene scene = new Scene(root, 965, 245);
+        stage.setMinHeight(245);
+        stage.setMinWidth(965);
 
         stage.setScene(scene);
         stage.setTitle("Navigation APLI");
@@ -62,8 +77,6 @@ public class mainApplication extends Application {
     public static void main(String[] args) {
         Application.launch(args);
     }
-
-
 
 }
 
