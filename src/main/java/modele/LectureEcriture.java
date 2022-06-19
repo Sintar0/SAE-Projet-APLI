@@ -64,29 +64,7 @@ public class LectureEcriture implements ConstantesVille {
      * @throws IOException
      */
 
-    /*
-    public static int [][] lectureDistances(File fichier) throws IOException{
-        BufferedReader bufferEntree = new BufferedReader(new FileReader(fichier));
-        LineNumberReader readerLigne = new LineNumberReader(bufferEntree); //récupération du numéro de ligne
-        String ligne = "";
 
-        StringTokenizer tokenizer;
-        do{
-            for (int i = 0 ; i < 29 ; i++){
-                ligne = readerLigne.readLine();
-                int numeroLigne = readerLigne.getLineNumber() -1; // commence à 1 par défaut. Or, on veut commencer à 0
-                if (ligne != null){
-                    tokenizer = new StringTokenizer(ligne, " ");
-                    String tokenDistances = tokenizer.nextToken();
-                        tabDistances[numeroLigne][i] = Integer.parseInt(tokenDistances); //Récupération des tokens sous forme de int
-                }
-            }
-        }
-        while (ligne != null);
-        bufferEntree.close();
-        return tabDistances;
-    }
-*/
     /**
      * Cette méthode retourne la distance entre deux villes
      * @param ville1 --> première ville pour le calcul de la distance
@@ -120,6 +98,95 @@ public class LectureEcriture implements ConstantesVille {
 
     public static String getVilleVendeur(String vendeur){
         return mapVendeurs.get(vendeur);
+    }
+
+    public static StringBuilder lectureFichierScenario(File fichier) throws IOException {
+        BufferedReader bufferEntree = new BufferedReader(new FileReader(fichier));
+
+        String ligne;
+
+        StringTokenizer tokenizer;
+        String token = null;
+
+        StringBuilder resultat = new StringBuilder();
+        do {
+            ligne = bufferEntree.readLine();
+            if (ligne != null) {
+                tokenizer = new StringTokenizer(ligne);
+
+                while (tokenizer.hasMoreTokens()) {
+                    token = tokenizer.nextToken();
+                    System.out.println(tokenizer.countTokens());
+                    if (tokenizer.countTokens() == 2){
+                        resultat.append("\n");
+                    }
+                    resultat.append(token);
+
+                }
+            }
+        }
+        while (ligne != null);
+        bufferEntree.close();
+        return resultat;
+    }
+    public static StringBuilder lectureFichierMembres() throws IOException {
+        BufferedReader bufferEntree = new BufferedReader(new FileReader("src/main/java/ressources/membres_APLI.txt"));
+
+        String ligne;
+
+        StringTokenizer tokenizer;
+        String token = null;
+
+        StringBuilder resultat = new StringBuilder();
+        do {
+            ligne = bufferEntree.readLine();
+            if (ligne != null) {
+                tokenizer = new StringTokenizer(ligne);
+
+                while (tokenizer.hasMoreTokens()) {
+                    token = tokenizer.nextToken();
+                    resultat.append(" ");
+                    System.out.println(tokenizer.countTokens());
+                    if (tokenizer.countTokens() == 1){
+                        resultat.append("\n");
+                    }
+                    resultat.append(token);
+
+                }
+            }
+        }
+        while (ligne != null);
+        bufferEntree.close();
+        return resultat;
+    }
+    public static StringBuilder lectureFichierDistances() throws IOException {
+        BufferedReader bufferEntree = new BufferedReader(new FileReader("src/main/java/ressources/distances.txt"));
+
+        String ligne;
+
+        StringTokenizer tokenizer;
+        String token = null;
+
+        StringBuilder resultat = new StringBuilder();
+        do {
+            ligne = bufferEntree.readLine();
+            if (ligne != null) {
+                tokenizer = new StringTokenizer(ligne);
+
+                while (tokenizer.hasMoreTokens()) {
+                    token = tokenizer.nextToken();
+                    resultat.append(" ");
+                    if (tokenizer.countTokens() == 30){
+                        resultat.append("\n");
+                    }
+                    resultat.append(token);
+
+                }
+            }
+        }
+        while (ligne != null);
+        bufferEntree.close();
+        return resultat;
     }
 
     /*

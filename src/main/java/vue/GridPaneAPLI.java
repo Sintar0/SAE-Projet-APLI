@@ -1,7 +1,5 @@
 package vue;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -24,54 +22,22 @@ public class GridPaneAPLI extends GridPane {
     protected HBox boxButton = new HBox();
 
     public GridPaneAPLI() throws IOException {
-        this.add(scenario, 2,1,1,1);
-        this.add(chemin, 1, 1, 1 ,1);
-        this.add(calculer,1,1);
-        this.add(totalKM, 1, 1,1,1);
+        this.add(scenario, 2, 1, 1, 1);
+        this.add(chemin, 1, 1, 1, 1);
+        this.add(calculer, 1, 1);
+        this.add(totalKM, 1, 1, 1, 1);
         this.add(boxButton, 1, 2);
         apLeft.getChildren().add(calculer);
         apRight.getChildren().add(totalKM);
-        boxButton.getChildren().addAll(apLeft,apRight);
+        boxButton.getChildren().addAll(apLeft, apRight);
         boxButton.setSpacing(275);
 
-        calculer.setOnAction(event);
+        File scenario0 = new File("src/main/java/ressources/scenario_0.txt");
+        Label scenario0Label = new Label(LectureEcriture.lectureFichierScenario(scenario0).toString());
+
+        scenario.setText(scenario0Label.getText());
 
     }
-    EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent actionEvent) {
-            File scenario0 = new File("src/main/java/ressources/scenario_1_1.txt");
-            File listeVendeurs = new File("src/main/java/ressources/membres_APLI.txt");
-            File villes = new File("src/main/java/ressources/distances.txt");
-            try {
-                LectureEcriture.lectureScenario(scenario0);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                LectureEcriture.lectureVendeurs(listeVendeurs);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                LectureEcriture.lectureVille(villes);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Label distanceChemin = new Label(Scenario.lectureDistance());
-            Label itineraire = new Label(Scenario.getChemin());
-            totalKM.setText(distanceChemin.getText());
-            chemin.setText(itineraire.getText());
-        }
-        File scenario0 = new File("src/main/java/ressources/scenario_1_1.txt");
-        Label scenario1 = new Label(Scenario.lectureScenario(scenario0).toString());
-
-
-
-    };
-
-
-
 }
 
 
