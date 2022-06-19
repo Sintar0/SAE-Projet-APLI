@@ -116,7 +116,6 @@ public class LectureEcriture implements ConstantesVille {
 
                 while (tokenizer.hasMoreTokens()) {
                     token = tokenizer.nextToken();
-                    System.out.println(tokenizer.countTokens());
                     if (tokenizer.countTokens() == 2){
                         resultat.append("\n");
                     }
@@ -146,7 +145,6 @@ public class LectureEcriture implements ConstantesVille {
                 while (tokenizer.hasMoreTokens()) {
                     token = tokenizer.nextToken();
                     resultat.append(" ");
-                    System.out.println(tokenizer.countTokens());
                     if (tokenizer.countTokens() == 1){
                         resultat.append("\n");
                     }
