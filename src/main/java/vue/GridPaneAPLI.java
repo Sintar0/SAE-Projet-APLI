@@ -36,7 +36,8 @@ public class GridPaneAPLI extends GridPane {
         Label scenario0Label = new Label(LectureEcriture.lectureFichierScenario(scenario0).toString());
 
         scenario.setText(scenario0Label.getText());
-
+        Label rappelBouton = new Label("Cliquez sur calculer pour afficher le chemin ainsi que la distance totale");
+        chemin.setText(rappelBouton.getText());
     }
 }
 

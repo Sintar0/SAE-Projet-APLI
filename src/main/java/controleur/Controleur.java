@@ -8,9 +8,10 @@ import javafx.scene.control.RadioMenuItem;
 import modele.LectureEcriture;
 import modele.Scenario;
 import vue.GridPaneAPLI;
+import vue.mainApplication;
+
 import java.io.File;
 import java.io.IOException;
-import vue.mainApplication;
 
 public class Controleur extends GridPaneAPLI implements EventHandler {
     File scenarioChoix = new File("src/main/java/ressources/scenario_0.txt");
@@ -22,25 +23,17 @@ public class Controleur extends GridPaneAPLI implements EventHandler {
     RadioMenuItem membreItem = mainApplication.membreItem;
     RadioMenuItem helpScenarioItem = mainApplication.helpScenarioItem;
     RadioMenuItem helpRessourceItem = mainApplication.helpRessourceItem;
+    File listeVendeurs = new File("src/main/java/ressources/membres_APLI.txt");
+    File villes = new File("src/main/java/ressources/distances.txt");
     public Controleur() throws IOException {
         EventHandler<ActionEvent> event = actionEvent -> {
-            File listeVendeurs = new File("src/main/java/ressources/membres_APLI.txt");
-            File villes = new File("src/main/java/ressources/distances.txt");
             if (scenario1Item.isSelected()){
+                scenarioChoix = new File("src/main/java/ressources/scenario_0.txt");
                 try {
                     LectureEcriture.lectureScenario(scenarioChoix);
                     scenarioChoixLabel = new Label(LectureEcriture.lectureFichierScenario(scenarioChoix).toString());
                     scenario.setText(scenarioChoixLabel.getText());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    LectureEcriture.lectureVendeurs(listeVendeurs);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    LectureEcriture.lectureVille(villes);
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -51,16 +44,7 @@ public class Controleur extends GridPaneAPLI implements EventHandler {
                     LectureEcriture.lectureScenario(scenarioChoix);
                     scenarioChoixLabel = new Label(LectureEcriture.lectureFichierScenario(scenarioChoix).toString());
                     scenario.setText(scenarioChoixLabel.getText());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    LectureEcriture.lectureVendeurs(listeVendeurs);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    LectureEcriture.lectureVille(villes);
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -75,19 +59,15 @@ public class Controleur extends GridPaneAPLI implements EventHandler {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                try {
-                    LectureEcriture.lectureVendeurs(listeVendeurs);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    LectureEcriture.lectureVille(villes);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
             }
-            Label distanceChemin = new Label(Scenario.lectureDistance());
-            Label itineraire = new Label(Scenario.getChemin());
+            Label distanceChemin = new Label();
+            try {
+                distanceChemin = new Label(Integer.toString(Scenario.lectureDistance(scenarioChoix)) + " km");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Label itineraire = new Label(Scenario.getChemin().toString());
             totalKM.setText(distanceChemin.getText());
             chemin.setText(itineraire.getText());
         };
@@ -137,9 +117,6 @@ public class Controleur extends GridPaneAPLI implements EventHandler {
         helpRessourceItem.setOnAction(eventHelpRessource);
         helpScenarioItem.setOnAction(eventHelpScenario);
     }
-
-
-
 
     @Override
     public void handle(Event event) {

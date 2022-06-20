@@ -1,11 +1,8 @@
 package modele;
 
-import java.lang.reflect.Array;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
-
-import modele.LectureEcriture;
-
-import static modele.LectureEcriture.*;
 
 public class Scenario extends LectureEcriture {
     static List<String> vendeurs;
@@ -30,7 +27,16 @@ public class Scenario extends LectureEcriture {
     }
 
 
-    public static String lectureDistance() {
+    /**
+     * Cette méthode retourne la distance calculé pour un scénario choisi
+     * @param fichierScenario
+     * @return somme des distances entre les villes du chemin
+     * @throws IOException
+     */
+    public static int lectureDistance(File fichierScenario) throws IOException {
+        lectureScenario(fichierScenario);
+        lectureVendeurs(new File("src/main/java/ressources/membres_APLI.txt"));
+        lectureVille(new File("src/main/java/ressources/distances.txt"));
         TreeMap<String, ArrayList<String>> voisinsSortants = new TreeMap<>();
         TreeMap<String, Integer> degresEntrants = new TreeMap<>();
         ArrayList<String> ordreGraph = new ArrayList<>();
@@ -92,14 +98,18 @@ public class Scenario extends LectureEcriture {
             i++;
             j++;
         }
-        return sum + "km";
+        return sum ;
     }
-    public static String getChemin (){
+
+    /**
+     * Utilise le résultat de la méthode lectureDistance pour établir un chemin entre les villes écrit sous la même forme que les scénarios
+     * @return cheminPropre --> StringBuilder
+     */
+    public static StringBuilder getChemin (){
         TreeMap<String, ArrayList<String>> voisinsSortants = new TreeMap<>();
-        TreeMap<String, Integer> degresEntrants = new TreeMap<>();
         ArrayList<String> ordreGraph = new ArrayList<>();
         LinkedList<String> ordreParfait = new LinkedList<>();
-        int sum = 0;
+        StringBuilder cheminPropre = new StringBuilder();
 
         for (int i = 0; i < vendeurs.size(); i++) {
             voisinsSortants.computeIfAbsent(vendeurs.get(i), k -> new ArrayList<>()).add(acheteurs.get(i));
@@ -147,7 +157,11 @@ public class Scenario extends LectureEcriture {
             ordreParfait.set(c, LectureEcriture.getVilleVendeur(ordreParfait.get(c)));
         }
 
-        return "Vous pouvez emprunter ce chemin :" + "\n" + ordreParfait ;
+        for(int s = 0 ; s< ordreParfait.size()-1; s++){
+            cheminPropre.append(ordreParfait.get(s)).append(" ->").append(ordreParfait.get(s+1)).append("\n");
+        }
+
+        return new StringBuilder("Vous pouvez emprunter ce chemin :" + "\n" + cheminPropre);
     }
         public String toString () {
             return vendeurs + "\n" + acheteurs;

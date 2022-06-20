@@ -75,6 +75,12 @@ public class LectureEcriture implements ConstantesVille {
         return TAB_DISTANCES[ville.get(ville1)][ville.get(ville2)];
     }
 
+    /**
+     * Cette méthode récupère les vendeurs de l'APLI liés avec leur ville
+     * @param fichier : Fichier membres_APLI.txt
+     * @return mapVendeurs : dictionnaire avec le vendeur en clé et la ville en valeur
+     * @throws IOException
+     */
     public static HashMap<String, String> lectureVendeurs(File fichier) throws IOException{
         BufferedReader bufferEntree = new BufferedReader(new FileReader(fichier));
 
@@ -96,10 +102,21 @@ public class LectureEcriture implements ConstantesVille {
         return mapVendeurs;
     }
 
+    /**
+     * Cette méthode récupère la ville d'un vendeur spécifique --> nécessite une exécution de lectureVendeurs au préalable
+     * @param vendeur : nom du vendeur
+     * @return ville du vendeur
+     */
     public static String getVilleVendeur(String vendeur){
         return mapVendeurs.get(vendeur);
     }
 
+    /**
+     * Lit le fichier scénario tel qu'il est écrit pour pouvoir le montrer sur l'interface graphique
+     * @param fichier
+     * @return scénario_xxx.txt tel quel
+     * @throws IOException
+     */
     public static StringBuilder lectureFichierScenario(File fichier) throws IOException {
         BufferedReader bufferEntree = new BufferedReader(new FileReader(fichier));
 
@@ -128,6 +145,12 @@ public class LectureEcriture implements ConstantesVille {
         bufferEntree.close();
         return resultat;
     }
+
+    /**
+     *
+     * @return
+     * @throws IOException
+     */
     public static StringBuilder lectureFichierMembres() throws IOException {
         BufferedReader bufferEntree = new BufferedReader(new FileReader("src/main/java/ressources/membres_APLI.txt"));
 
@@ -157,6 +180,11 @@ public class LectureEcriture implements ConstantesVille {
         bufferEntree.close();
         return resultat;
     }
+
+    /**
+     * @return
+     * @throws IOException
+     */
     public static StringBuilder lectureFichierDistances() throws IOException {
         BufferedReader bufferEntree = new BufferedReader(new FileReader("src/main/java/ressources/distances.txt"));
 
@@ -187,15 +215,4 @@ public class LectureEcriture implements ConstantesVille {
         return resultat;
     }
 
-    /*
-    public static void ecritureScenario (String nomFichier, Scenario scenario) throws IOException{
-        PrintWriter sortie = new PrintWriter(new BufferedWriter(new FileWriter(nomFichier)));
-        int i = 0;
-        for (String vendeur : scenario.getVendeurs()){
-            sortie.println(vendeur + " -> " + scenario.getAcheteurs().get(i));
-            i++;
-        }
-        sortie.close();
-    }
-     */
 }
