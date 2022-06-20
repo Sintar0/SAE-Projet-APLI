@@ -23,8 +23,6 @@ public class Controleur extends GridPaneAPLI implements EventHandler {
     RadioMenuItem membreItem = mainApplication.membreItem;
     RadioMenuItem helpScenarioItem = mainApplication.helpScenarioItem;
     RadioMenuItem helpRessourceItem = mainApplication.helpRessourceItem;
-    File listeVendeurs = new File("src/main/java/ressources/membres_APLI.txt");
-    File villes = new File("src/main/java/ressources/distances.txt");
     public Controleur() throws IOException {
         EventHandler<ActionEvent> event = actionEvent -> {
             if (scenario1Item.isSelected()){
@@ -63,7 +61,7 @@ public class Controleur extends GridPaneAPLI implements EventHandler {
             }
             Label distanceChemin = new Label();
             try {
-                distanceChemin = new Label(Integer.toString(Scenario.lectureDistance(scenarioChoix)) + " km");
+                distanceChemin = new Label(Scenario.lectureDistance(scenarioChoix) + " km");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -92,7 +90,7 @@ public class Controleur extends GridPaneAPLI implements EventHandler {
         EventHandler<ActionEvent> eventHelpScenario = actionEvent -> {
             Label labelAideScenario = new Label("""
                     Ce menu contient tous les scénarios sous la forme de fichiers texte
-
+                
                     Cette zone de texte affiche le scénario choisi""");
             Label labelKM = new Label("Affiche le kilométrage");
             Label labelChemin = new Label("Indique le chemin à prendre");

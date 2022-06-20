@@ -147,8 +147,7 @@ public class LectureEcriture implements ConstantesVille {
     }
 
     /**
-     *
-     * @return
+     * @return résultat du fichier membres_APLI.txt
      * @throws IOException
      */
     public static StringBuilder lectureFichierMembres() throws IOException {
@@ -182,7 +181,7 @@ public class LectureEcriture implements ConstantesVille {
     }
 
     /**
-     * @return
+     * @return résultat du fichier distances.txt
      * @throws IOException
      */
     public static StringBuilder lectureFichierDistances() throws IOException {

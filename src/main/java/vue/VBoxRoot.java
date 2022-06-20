@@ -8,7 +8,6 @@ import java.io.IOException;
 
 public class VBoxRoot extends VBox {
     private static GridPaneAPLI gridPaneAPLI;
-
     static {
         try {
             gridPaneAPLI = new GridPaneAPLI();
@@ -32,9 +31,6 @@ public class VBoxRoot extends VBox {
     }
     public static Controleur getControleur(){
         return controleur;
-    }
-    public static GridPaneAPLI getScenarioPane(){
-        return gridPaneAPLI;
     }
 
 
